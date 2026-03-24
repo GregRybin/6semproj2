@@ -43,6 +43,38 @@ std::vector<Cube*> getNeighborCubes(std::vector<std::vector<std::vector<Cube>>>&
     return neighbors;
 };
 
+std::vector<std::vector<std::vector<Cube>>> createGrid(
+    double x_min, double x_max,
+    double y_min, double y_max,
+    double z_min, double z_max,
+    int div_x, int div_y, int div_z) {
+    double cube_size_x = (x_max - x_min) / div_x;
+    double cube_size_y = (y_max - y_min) / div_y;
+    double cube_size_z = (z_max - z_min) / div_z;
+    std::vector<std::vector<std::vector<Cube>>> grid;
+    grid.resize(div_x);
+    for (int i = 0; i < div_x; ++i) {
+        grid[i].resize(div_y);
+        double current_x_min = x_min + i * cube_size_x;
+        double current_x_max = current_x_min + cube_size_x;
+        for (int j = 0; j < div_y; ++j) {
+            grid[i][j].resize(div_z);
+            double current_y_min = y_min + j * cube_size_y;
+            double current_y_max = current_y_min + cube_size_y;
+            for (int k = 0; k < div_z; ++k) {
+                double current_z_min = z_min + k * cube_size_z;
+                double current_z_max = current_z_min + cube_size_z;
+                grid[i][j][k] = Cube(i, j, k, 
+                                     current_x_min, current_x_max,
+                                     current_y_min, current_y_max,
+                                     current_z_min, current_z_max);
+            }
+        }
+    }
+    
+    return grid;
+}
+
 int main() {
   return 0;
 }
