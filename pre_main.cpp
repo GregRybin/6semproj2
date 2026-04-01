@@ -36,6 +36,14 @@ double angle(const Point& p) {
     return std::atan2(p.y, p.x);
 }
 
+bool isLeft(const Point& p, const Line& line) {
+    return (p - line.p).cross(line.v) > 0;
+}
+
+class VoronoiDiagram {
+
+}
+
 int main() {
     std::vector<Point> points = {
         Point(1.2, 8.5),  // A
